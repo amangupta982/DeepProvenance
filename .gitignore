@@ -1,0 +1,51 @@
+# ── Dependencies ─────────────────────────────────────
+node_modules/
+frontend/node_modules/
+contracts/node_modules/
+backend/venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# ── Build Output ─────────────────────────────────────
+frontend/dist/
+*.egg-info/
+build/
+dist/
+
+# ── Environment ──────────────────────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── IDE & System ─────────────────────────────────────
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Docker ───────────────────────────────────────────
+docker-compose.override.yml
+
+# ── ML Artifacts ─────────────────────────────────────
+ml/checkpoints/
+*.pth
+*.pt
+*.onnx
+wandb/
+
+# ── Logs ─────────────────────────────────────────────
+*.log
+logs/
+
+# ── Misc ─────────────────────────────────────────────
+coverage/
+.coverage
+htmlcov/
+tsconfig.tsbuildinfo
