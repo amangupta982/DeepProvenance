@@ -1,0 +1,289 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DeepProvenance — Design System
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #0A0A0F;
+    color: #E0E0E8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0A0F;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #222234;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333348;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00FF88;
+  }
+}
+
+@layer components {
+  /* ── Glass Card ────────────────────────────────────── */
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+  .glass-card-hover:hover {
+    @apply border-white/[0.12] bg-white/[0.05];
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* ── Verdict Cards ─────────────────────────────────── */
+  .verdict-original {
+    @apply border-dp-green/30 bg-dp-green/[0.05];
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.1), inset 0 1px 0 rgba(0, 255, 136, 0.1);
+  }
+
+  .verdict-reuse {
+    @apply border-dp-cyan/30 bg-dp-cyan/[0.05];
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.1), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+  }
+
+  .verdict-unverified {
+    @apply border-dp-amber/30 bg-dp-amber/[0.05];
+    box-shadow: 0 0 30px rgba(255, 184, 0, 0.1), inset 0 1px 0 rgba(255, 184, 0, 0.1);
+  }
+
+  .verdict-fake {
+    @apply border-dp-red/30 bg-dp-red/[0.05];
+    box-shadow: 0 0 30px rgba(255, 51, 102, 0.1), inset 0 1px 0 rgba(255, 51, 102, 0.1);
+  }
+
+  /* ── Buttons ───────────────────────────────────────── */
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold text-dp-bg transition-all duration-300;
+    background: linear-gradient(135deg, #00FF88, #00D4FF);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition-all duration-300;
+  }
+  .btn-secondary:hover {
+    @apply border-white/20 bg-white/10;
+  }
+
+  .btn-danger {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold text-white transition-all duration-300;
+    background: linear-gradient(135deg, #FF3366, #FF0044);
+  }
+  .btn-danger:hover {
+    box-shadow: 0 0 30px rgba(255, 51, 102, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* ── Badge ─────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .badge-green {
+    @apply badge bg-dp-green/10 text-dp-green border border-dp-green/20;
+  }
+  .badge-cyan {
+    @apply badge bg-dp-cyan/10 text-dp-cyan border border-dp-cyan/20;
+  }
+  .badge-amber {
+    @apply badge bg-dp-amber/10 text-dp-amber border border-dp-amber/20;
+  }
+  .badge-red {
+    @apply badge bg-dp-red/10 text-dp-red border border-dp-red/20;
+  }
+
+  /* ── Input ─────────────────────────────────────────── */
+  .input-field {
+    @apply w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 outline-none transition-all duration-300;
+  }
+  .input-field:focus {
+    @apply border-dp-green/50 bg-white/[0.07];
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+  }
+
+  /* ── Upload Zone ───────────────────────────────────── */
+  .upload-zone {
+    @apply relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/10 bg-white/[0.02] p-12 transition-all duration-300 cursor-pointer;
+  }
+  .upload-zone:hover, .upload-zone-active {
+    @apply border-dp-green/40 bg-dp-green/[0.03];
+  }
+
+  /* ── Progress Steps ────────────────────────────────── */
+  .progress-step {
+    @apply flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-white/40 transition-all duration-500;
+  }
+  .progress-step-active {
+    @apply text-dp-green bg-dp-green/[0.05] border border-dp-green/20 rounded-lg;
+  }
+  .progress-step-complete {
+    @apply text-dp-green/60;
+  }
+
+  /* ── Glow Ring (Certificate) ───────────────────────── */
+  .glow-ring {
+    @apply relative;
+  }
+  .glow-ring::before {
+    content: '';
+    @apply absolute -inset-2 rounded-full;
+    background: conic-gradient(from 0deg, #00FF88, #00D4FF, #8B5CF6, #FF3366, #FFB800, #00FF88);
+    animation: rotate-glow 4s linear infinite;
+    filter: blur(8px);
+    opacity: 0.6;
+  }
+
+  /* ── Scan Line Effect ──────────────────────────────── */
+  .scan-overlay::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.03) 50%,
+      transparent 100%
+    );
+    height: 100px;
+    animation: scan-line 3s linear infinite;
+  }
+
+  /* ── Stat Card ─────────────────────────────────────── */
+  .stat-card {
+    @apply glass-card p-6;
+  }
+  .stat-value {
+    @apply text-3xl font-bold tracking-tight;
+  }
+  .stat-label {
+    @apply text-sm text-white/50 mt-1;
+  }
+
+  /* ── Table ─────────────────────────────────────────── */
+  .dp-table {
+    @apply w-full text-sm;
+  }
+  .dp-table thead {
+    @apply border-b border-white/10;
+  }
+  .dp-table th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-white/40;
+  }
+  .dp-table td {
+    @apply px-4 py-4 text-white/70;
+  }
+  .dp-table tbody tr {
+    @apply border-b border-white/[0.04] transition-colors duration-200;
+  }
+  .dp-table tbody tr:hover {
+    @apply bg-white/[0.02];
+  }
+
+  /* ── Navigation ────────────────────────────────────── */
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium text-white/50 transition-colors duration-200;
+  }
+  .nav-link:hover {
+    @apply text-white;
+  }
+  .nav-link-active {
+    @apply text-dp-green;
+  }
+  .nav-link-active::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-6 rounded-full bg-dp-green;
+  }
+
+  /* ── Code Block ────────────────────────────────────── */
+  .code-block {
+    @apply rounded-xl bg-dp-bg-100 border border-white/[0.06] p-4 font-mono text-sm text-dp-green/80 overflow-x-auto;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #00FF88, #00D4FF);
+  }
+
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #FFB800, #FF3366);
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+  }
+}
+
+/* ── Keyframes ─────────────────────────────────────── */
+@keyframes rotate-glow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Heatmap Overlay ─────────────────────────────────── */
+.heatmap-overlay {
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ── Animated Counter ────────────────────────────────── */
+@property --num {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.animated-counter {
+  transition: --num 2s ease-out;
+  counter-reset: num var(--num);
+}
+.animated-counter::after {
+  content: counter(num);
+}
