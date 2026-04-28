@@ -1,0 +1,36 @@
+name: Model Evaluation
+on:
+  push:
+    paths: ['ml/**']
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install torch torchvision timm scikit-learn numpy Pillow pytorch-grad-cam
+
+      - name: Download test dataset
+        run: |
+          echo "Download held-out test set from artifact storage"
+          # aws s3 cp s3://deepprovenance-data/test-set ./ml/data/test --recursive
+
+      - name: Run evaluation
+        run: |
+          cd ml && python evaluate.py \
+            --model-path ./checkpoints/vit_forgery_detector.pth \
+            --data-dir ./data \
+            --output-dir ./results
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-evaluation
+          path: ml/results/

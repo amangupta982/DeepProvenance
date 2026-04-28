@@ -1,0 +1,44 @@
+name: CD
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t deepprovenance-backend:latest ./backend
+
+      - name: Push to registry
+        run: |
+          echo "Push to container registry (Railway/Render)"
+          # docker push $REGISTRY/deepprovenance-backend:latest
+
+      - name: Deploy
+        run: |
+          echo "Deploy to Railway/Render via API"
+          # curl -X POST $DEPLOY_WEBHOOK
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install and build
+        run: cd frontend && npm ci && npm run build
+
+      - name: Deploy to Vercel
+        run: |
+          echo "Deploy to Vercel"
+          # npx vercel --prod --token $VERCEL_TOKEN
+
+  test:
+    uses: ./.github/workflows/ci.yml
