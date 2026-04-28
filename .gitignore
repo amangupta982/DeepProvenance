@@ -6,7 +6,7 @@ backend/venv/
 __pycache__/
 *.pyc
 *.pyo
-
+__pycache__
 # ── Build Output ─────────────────────────────────────
 frontend/dist/
 *.egg-info/
