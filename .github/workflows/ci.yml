@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements-ci.txt
 
       - name: Install frontend deps
         run: cd frontend && npm ci
@@ -32,7 +34,7 @@ jobs:
         run: cd frontend && npx tsc --noEmit
 
       - name: Install backend deps
-        run: cd backend && pip install -r requirements.txt
+        run: cd backend && pip install -r requirements-ci.txt
 
       - name: Lint backend (Ruff)
         run: cd backend && ruff check .
@@ -47,9 +49,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements-ci.txt
 
       - name: Install dependencies
-        run: cd backend && pip install -r requirements.txt
+        run: cd backend && pip install -r requirements-ci.txt
 
       - name: Run tests
         env:
@@ -63,9 +67,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: contracts/package-lock.json
 
       - name: Install dependencies
-        run: cd contracts && npm install
+        run: cd contracts && npm ci
 
       - name: Compile contracts
         run: cd contracts && npx hardhat compile
@@ -80,6 +86,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
         run: cd frontend && npm ci

@@ -1,0 +1,33 @@
+# DeepProvenance Backend — CI Dependencies
+# Lightweight subset for CI/CD pipelines (excludes ML/GPU/infra packages)
+
+# ── Core Framework ───────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+pydantic==2.8.2
+pydantic-settings==2.3.4
+python-multipart==0.0.9
+httpx==0.27.0
+structlog==24.4.0
+
+# ── Database (ORM only, no driver) ───────────────────
+sqlalchemy[asyncio]==2.0.31
+alembic==1.13.2
+# asyncpg excluded — C build, not needed for DEMO_MODE tests
+
+# ── Auth ─────────────────────────────────────────────
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# ── Utilities ────────────────────────────────────────
+Pillow==10.4.0
+
+# ── Testing & Linting ───────────────────────────────
+pytest==8.2.2
+pytest-asyncio==0.23.7
+ruff==0.5.4
+mypy==1.10.1
+
+# Excluded from CI (heavy / not needed in DEMO_MODE):
+# torch, torchvision, timm, pytorch-grad-cam, opencv-python-headless
+# asyncpg, web3, pinecone-client, celery, redis, minio
