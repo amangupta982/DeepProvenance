@@ -7,6 +7,10 @@ __pycache__/
 *.pyc
 *.pyo
 __pycache__
+# ── Contracts ────────────────────────────────────────
+contracts/artifacts/
+contracts/cache/
+contracts/typechain-types/
 # ── Build Output ─────────────────────────────────────
 frontend/dist/
 *.egg-info/

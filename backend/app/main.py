@@ -1,21 +1,19 @@
 """DeepProvenance — FastAPI Application."""
-from fastapi import FastAPI, UploadFile, File, Depends, HTTPException, status, Form, Query
+from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 import structlog
 import hashlib
 import uuid
 import time
 import random
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 from app.config import get_settings
 from app.schemas import (
     RegisterRequest, LoginRequest, TokenResponse, UserResponse,
-    VerifyTaskResponse, VerificationResult, FeatureScores, CertificateResponse,
-    MintRequest, AnalyticsOverview, PlatformViolation, ModelStatsResponse,
-    TakedownRequest, VerdictSchema
+    VerifyTaskResponse, VerificationResult, FeatureScores, AnalyticsOverview, ModelStatsResponse,
+    TakedownRequest
 )
 from app.ml import detector, dna_extractor, verdict_engine
 from app.blockchain import blockchain_service

@@ -3,7 +3,6 @@ import hashlib
 import time
 import random
 import structlog
-from typing import Optional
 
 logger = structlog.get_logger()
 

@@ -1,5 +1,4 @@
 """DeepProvenance — Unit Tests for ML Pipeline."""
-import pytest
 
 
 class TestFeatureExtractor:

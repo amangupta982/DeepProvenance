@@ -1,7 +1,6 @@
 """DeepProvenance — ML Inference Service (Simulated for demo, real architecture)."""
 import hashlib
 import random
-import time
 from typing import Optional
 import structlog
 
@@ -42,8 +41,6 @@ class ForgeryDetector:
 
     def predict(self, image_bytes: bytes, file_hash: str = "") -> dict:
         """Run forgery detection on an image."""
-        start = time.time()
-
         if self.demo_mode:
             return self._simulate_prediction(file_hash)
 

@@ -62,6 +62,8 @@ jobs:
 
   test-contracts:
     runs-on: ubuntu-latest
+    env:
+      HARDHAT_DISABLE_TELEMETRY_PROMPT: "true"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

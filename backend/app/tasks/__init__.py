@@ -1,5 +1,4 @@
 """DeepProvenance — Celery task definitions."""
-import hashlib
 import time
 import uuid
 import structlog
