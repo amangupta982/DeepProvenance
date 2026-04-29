@@ -68,13 +68,20 @@ async def register(req: RegisterRequest):
     if req.email in demo_users:
         raise HTTPException(status_code=400, detail="Email already registered")
     user_id = str(uuid.uuid4())
+    now = datetime.now(timezone.utc)
     user = {
         "id": user_id, "email": req.email, "role": req.role.value,
-        "device_id": req.device_id, "created_at": datetime.now(timezone.utc).isoformat()
+        "device_id": req.device_id, "created_at": now.isoformat()
     }
     demo_users[req.email] = user
     logger.info("auth.register", email=req.email, role=req.role)
-    return UserResponse(**user)
+    return UserResponse(
+        id=user_id, 
+        email=req.email, 
+        role=req.role.value, 
+        device_id=req.device_id, 
+        created_at=now
+    )
 
 
 @app.post("/api/v1/auth/login", response_model=TokenResponse, tags=["Auth"])

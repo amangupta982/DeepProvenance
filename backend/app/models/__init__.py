@@ -47,7 +47,7 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     email = Column(String(255), unique=True, nullable=False, index=True)
     password_hash = Column(String(255), nullable=False)
-    role = Column(SAEnum(UserRole), nullable=False, default=UserRole.PHOTOGRAPHER)
+    role: Column = Column(SAEnum(UserRole), nullable=False, default=UserRole.PHOTOGRAPHER)
     device_id = Column(String(255), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -93,8 +93,8 @@ class Upload(Base):
     uploader_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     file_path = Column(String(512), nullable=False)
     file_hash = Column(String(128), nullable=False, index=True)
-    upload_type = Column(SAEnum(UploadType), nullable=False, default=UploadType.SUSPICIOUS)
-    verdict = Column(SAEnum(VerdictType), nullable=True)
+    upload_type: Column = Column(SAEnum(UploadType), nullable=False, default=UploadType.SUSPICIOUS)
+    verdict: Column = Column(SAEnum(VerdictType), nullable=True)
     ai_score = Column(Float, nullable=True)
     registry_match_id = Column(String(128), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -110,7 +110,7 @@ class Violation(Base):
     certificate_id = Column(UUID(as_uuid=True), ForeignKey("certificates.id"), nullable=False)
     violator_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     reported_at = Column(DateTime, default=datetime.utcnow)
-    status = Column(SAEnum(ViolationStatus), default=ViolationStatus.PENDING)
+    status: Column = Column(SAEnum(ViolationStatus), default=ViolationStatus.PENDING)
 
 
 class AuditLog(Base):
