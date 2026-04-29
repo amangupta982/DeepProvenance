@@ -76,10 +76,10 @@ async def register(req: RegisterRequest):
     demo_users[req.email] = user
     logger.info("auth.register", email=req.email, role=req.role)
     return UserResponse(
-        id=user_id, 
-        email=req.email, 
-        role=req.role.value, 
-        device_id=req.device_id, 
+        id=user_id,
+        email=req.email,
+        role=req.role.value,
+        device_id=req.device_id,
         created_at=now
     )
 
